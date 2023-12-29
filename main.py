@@ -1,115 +1,36 @@
 
 # Importar el módulo random para generar números aleatorios
 import random
-print('''
 
- _                                             
-| |                                            
-| |__   __ _ _ __   __ _ _ __ ___   __ _ _ __  
-| '_ \ / _` | '_ \ / _` | '_ ` _ \ / _` | '_ \ 
-| | | | (_| | | | | (_| | | | | | | (_| | | | |
-|_| |_|\__,_|_| |_|\__, |_| |_| |_|\__,_|_| |_|
+#logos del juego
+from hangman_art import *
 
-''')
-print('''
-  ___________.._______
- | .__________))______|
- | | / /      ||
- | |/ /       ||
- | | /        ||.-''.
- | |/         |/  _  \\
- | |          ||  `/,|
- | |          (\\\\`_.'
- | |         .-`--'.
- | |        /Y . . Y\\
- | |       // |   | \\
- | |      //  | . |  \\
- | |     ')   |   |   (`
- | |          ||'||
- | |          || ||
- | |          || ||
- | |          || ||
- | |         / | | \\
- """"""""""|_`-' `-' |"""|
- |"|"""""""\ \       '"|"|
- | |        \ \        | |
- : :         \ \       : :  
- . .          `'       . .
-''')
+#lista de palabras del juego
+from hangman_words import *
 
-print("""
-*GUESS THE LETTERS IN THE HIDDEN WORD. 
-    *EACH INCORRECT GUESS ADDS A PART TO THE HANGMAN. 
-        *TRY TO GUESS THE WORD BEFORE THE HANGMAN IS COMPLETE.
+from hangman_instruccions import *
 
-""")
+
+from hangman_stages import *
+
+
+import os
+#titulo del juego
+print(title)
+
+#logo del juego, del archivo hangman_art.py
+print(logo)
+
+#instrucciones del juego, del archivo hangman_instructions.py
+print(instruccions)
 
 print("")
 print("")
 #  lista de palabras posibles para el juego
-list_words = [
-     "giraffe", "elephant","cheetah","butterfly","penguin","kangaroo","crocodile","whale","squirrel","flamingo","tiger","zebra","panda","parrot","dolphin","octopus","koala","rhinoceros","hippopotamus","caterpillar","falcon","jellyfish","lobster","chameleon", "armadillo","lemur","quokka","hummingbird","beetle","porcupine","pelican","platypus","lemming","bison","seagull","gazelle","koala","eagle","firefly","hedgehog","albatross","dragonfly","anteater","fox","narwhal","peacock","platypus",
- ]
+
 # una sola palabra para probar el codigo
 # list_words = ["dog"]
 
-#Estados en los que se encuentra nuestro jugador
-stages = ['''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
 
 
 # Elegir una palabra al azar de la lista y asignarla a una variable llamada chosen_word
@@ -140,11 +61,18 @@ print(f'The word to be guessed is "{display_string}".')
 
 # Imprimir una línea vacía para separar
 print('')
+print('')
 
 # Pedir al usuario que adivine una letra y asignar su respuesta a una variable llamada guess. Convertir la respuesta a minúscula.
 guess=input("guess a letter: ").lower()
 
 
+    
+while guess.isdigit(): 
+    print("you did not enter a letter, please try again")
+    print("")
+    guess=input("guess a letter: ").lower()
+    
 
 # Crear una variable llamada counter para llevar la cuenta de la posición de cada letra en la palabra elegida
 counter=0
@@ -155,11 +83,11 @@ end_of_game=False
 
 #variable que nos indicara el numero de vidas que tiene el usuario, y las veces que podra intentar, adivinar una palabra
 lives=6
-print(lives)
+# print(lives) para pruebas en el codigo
 
 #ciclo while para permitir al usuario adivinar de nuevo una letra de la palabra hasta que gane o pierda
 while end_of_game==False:
-    
+    os.system('cls')
     #miramos si todavia hay espacios abiertos "_" dentro de nuestra palabra ha adivinar, que tenemos mientras tanto en forma de lista
     if "_"  in display_list:
     
@@ -180,7 +108,7 @@ while end_of_game==False:
         if guess not in display_list:
             
             # Si es así, imprimir un mensaje que le dice al usuario que la palabra no contiene la letra adivinada
-            print(f"the word doesn't contain the letter {guess}")
+            print(f"the word doesn't contain the letter {guess}, you lose a life")
             
             print(stages[lives])
             
@@ -213,6 +141,11 @@ while end_of_game==False:
             # Pedir al usuario que adivine otra letra y asignar su respuesta a una variable llamada guess. Convertir la respuesta a minúscula.
             guess=input("guess another letter: ").lower()
             
+            
+            while guess.isdigit(): 
+                print("you did not enter a letter, please try again")
+                print("")
+                guess=input("guess a letter: ").lower()
     else:
         print("game over")
         
