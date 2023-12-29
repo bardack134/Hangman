@@ -8,7 +8,7 @@ from hangman_art import *
 #lista de palabras del juego
 from hangman_words import *
 
-from hangman_instruccions import *
+from hangman_instructions import *
 
 
 from hangman_stages import *
@@ -87,7 +87,7 @@ lives=6
 
 #ciclo while para permitir al usuario adivinar de nuevo una letra de la palabra hasta que gane o pierda
 while end_of_game==False:
-    os.system('cls')
+    os.system('cls')#limpiamos la consola
     #miramos si todavia hay espacios abiertos "_" dentro de nuestra palabra ha adivinar, que tenemos mientras tanto en forma de lista
     if "_"  in display_list:
     
@@ -117,7 +117,7 @@ while end_of_game==False:
             
             
             #si el numero de vidas llega a cero, signifca que se acabo el juego, la variable end_of_game se vuelve True y termnina el bucle while
-            if lives==0:
+            if lives==-1:
                 print("you have lost, end of the game")
                 
                 end_of_game=True
