@@ -139,13 +139,16 @@ while end_of_game==False:
         if end_of_game==False:
             
             # Pedir al usuario que adivine otra letra y asignar su respuesta a una variable llamada guess. Convertir la respuesta a minúscula.
-            guess=input("guess another letter: ").lower()
+            guess=input("guess Another letter: ").lower()
+            
             
             
             while guess.isdigit(): 
                 print("you did not enter a letter, please try again")
                 print("")
                 guess=input("guess a letter: ").lower()
+                
+            
     else:
         print("game over")
         
